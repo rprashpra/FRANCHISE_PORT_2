@@ -26,16 +26,18 @@ namespace FRANCHISE_PORT_2
                 // to retrive specific  textfield name   
                 DropDownList12.DataSource = ds.Tables[0];      //assigning datasource to the dropdownlist  
                 DropDownList12.DataBind();
-                if (new_id.Visible == true)
-                {
-                    new_id.Enabled = true;
-                }
-                else
-                {
-                    new_id.Enabled = false;
-                }
-                ClientScript.RegisterStartupScript(this.GetType(), "Javascript", "javascript:getDate(); ", true);
             }
+            if (new_id.Visible == true)
+            {
+                new_id.Enabled = true;
+            }
+            else
+            {
+                new_id.Enabled = false;
+            }
+            ClientScript.RegisterStartupScript(this.GetType(), "Javascript", "javascript:getDate(); ", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "Javascript", "javascript:openWin(); ", false);
+            Btn_SAVE.Enabled = true;
         }
         protected void Btn_SAVE_Click(object sender, EventArgs e)
         {
@@ -60,10 +62,15 @@ namespace FRANCHISE_PORT_2
             new_id.Enabled = true;
             ClientScript.RegisterStartupScript(this.GetType(), "Javascript", "javascript:getDate(); ", false);
             Messagebox("Data Saved Successfully");
+            Messagebox("PatID is:" + new_id.Text);
+            ClientScript.RegisterStartupScript(this.GetType(), "Javascript", "javascript:openWin(); ",false);
+            Btn_SAVE.Enabled = true;
         }
         public void Messagebox(string xMessage)
         {
             Response.Write("<script>alert('" + xMessage + "')</script>");
+            Response.Write("<script>alret('"+ new_id.Text + "')</script>");
         }
+       
     }
 }
